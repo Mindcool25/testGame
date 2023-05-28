@@ -20,14 +20,38 @@ class ECSManager {
         ECSManager();
         Entity& createEntity();
 
+        //template<typename T>
+        //void addComp(Entity& entity, T comp);
         template<typename T>
-        void addComponent(Entity& entity, T component);
+        void addComp(Entity& entity, T comp)
+        {
+            std::string typeName = typeid(T).name();
+            entity.components[typeName] = new T(comp);
+            componentEntities[typeName].push_back(entity);
+        }
 
         template<typename T>
-        T* getComponent(Entity& entity);
+        T* getComponent(Entity& entity)
+        {
+            std::string typeName = typeid(T).name();
+            if (entity.components.find(typeName) != entity.components.end())
+            {
+                return static_cast<T*>(entity.components[typeName]);
+            }
+            return nullptr;
+        }
 
         template<typename T>
-        std::vector<Entity>& getEntitiesWithComponent();
+        std::vector<Entity>& getEntitiesWithComponent()
+        {
+            std::string typeName = typeid(T).name();
+            if (componentEntities.find(typeName) != componentEntities.end())
+            {
+                return componentEntities[typeName];
+            }
+            static std::vector<Entity> emptyList;
+            return emptyList;
+        }
 
     private:
         int nextEntityId;

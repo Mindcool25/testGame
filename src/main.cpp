@@ -12,11 +12,6 @@
 
 #include "manager/manager.hpp"
 
-std::string test_func(int a, std::string b) {
-	return b + std::string('D', a);
-}
-
-
 int main(int argc, char* argv[]) {
 
     AsciiSheet test;
@@ -24,12 +19,12 @@ int main(int argc, char* argv[]) {
 
     ECSManager manager;
 
-    Entity& e1 = manager.createEntity();
+    Entity e1 = manager.createEntity();
 
-    manager.addComponent(e1, Pos{1, 3});
+    manager.addComp(e1, Pos{1, 3});
 
-    //Pos* pos1 = manager.getComponent<Pos>(e1);
-    //std::cout << "x: " << pos1->x << " y: " << pos1->y << std::endl;
+    Pos* pos1 = manager.getComponent<Pos>(e1);
+    std::cout << "x: " << pos1->x << " y: " << pos1->y << std::endl;
 
     // Creating lua object to hold a script
 	// Maybe create a different obj per thing?

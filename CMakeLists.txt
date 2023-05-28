@@ -6,11 +6,11 @@ add_compile_options(-Wall)
 
 add_executable(
   testgame
-  src/main.cpp
+  src/manager/manager.cpp
   src/ascii/asciisheet.cpp
   src/window/display.cpp
   src/component/component.cpp
-  src/manager/manager.cpp
+  src/main.cpp
 )
 
 find_package(SOL2 REQUIRED)
