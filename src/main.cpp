@@ -96,11 +96,13 @@ void input(ECSManager manager)
             {
                 std::cout << "almost to crash" << std::endl;
                 std::cout << "WOOO" << std::endl;
-                if(manager.getComponent<Pos>(*i) == nullptr)
+                if(manager.getComponent<Velocity>(*i) == nullptr)
                 {
                     std::cout << "Oh no bois" << std::endl;
                 }
-                manager.getComponent<Pos>(*i)->x += 1;
+                // Crashes here WTF
+                Velocity* vel = manager.getComponent<Velocity>(*i);
+                vel->x += 1;
                 std::cout << "Whoops" << std::endl;
             }
         }

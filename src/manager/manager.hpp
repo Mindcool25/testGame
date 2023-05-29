@@ -32,6 +32,7 @@ class ECSManager {
             {
                 return static_cast<T*>(entity.components[typeName]);
             }
+            std::cout << "Hah ruining your program" <<std::endl;
             return nullptr;
         }
 
