@@ -37,15 +37,16 @@ int main(int argc, char* argv[]) {
     sprite.setTextureRect(test.asciiList.at(2));
 
     Entity e1 = manager.createEntity();
-    Entity e2 = manager.createEntity();
 
-    manager.addComp(e1, Pos{1, 3});
+    manager.addComp(e1, Pos{0, 0});
     manager.addComp(e1, Actor{sprite});
     manager.addComp(e1, Controllable{true});
+    manager.addComp(e1, Velocity{0, -1});
 
-    manager.addComp(e2, Pos{4, 3});
-    manager.addComp(e2, Actor{sprite});
-
+    if (manager.hasBothComponents<Pos, Actor>(e1))
+    {
+        std::cout << "yes" << std::endl;
+    }
     Pos* pos1 = manager.getComponent<Pos>(e1);
     std::cout << "x: " << pos1->x << " y: " << pos1->y << std::endl;
 
@@ -91,12 +92,37 @@ int input(ECSManager manager)
         {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
             {
-                manager.getComponent<Pos>(*i)->x += 1;
+                manager.getComponent<Velocity>(*i)->x -= 1;
             }
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-            std::cout << "Left" << std::endl;
         }
     }
     return 0;
+}
+
+void updateMovement(ECSManager manager)
+{
+    std::vector<Entity> toUpdate = manager.getEntitiesWithComponent<Velocity>();
+
+    for (auto i = toUpdate.begin(); i != toUpdate.end(); i++)
+    {
+        Velocity* vel = manager.getComponent<Velocity>(*i);
+        Pos* pos = manager.getComponent<Pos>(*i);
+
+        pos->x += vel->x;
+        pos->y += vel->y;
+    }
+}
+
+void updateActor(ECSManager manager)
+{
+    std::vector<Entity> toUpdate = manager.getEntitiesWithComponent<Actor>();
+
+    for (auto i = toUpdate.begin(); i != toUpdate.end(); i++)
+    {
+        Actor* actor = manager.getComponent<Actor>(*i);
+        Pos* pos = manager.getComponent<Pos>(*i);
+        std::cout << "test" << std::endl;
+
+        actor->actor.setPosition(pos->x, pos->y);
+    }
 }

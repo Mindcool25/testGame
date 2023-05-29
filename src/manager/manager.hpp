@@ -35,6 +35,14 @@ class ECSManager {
             return nullptr;
         }
 
+        template<typename T, typename U>
+        bool hasBothComponents(Entity& e)
+        {
+            if(getComponent<T>(e) != nullptr && getComponent<U>(e) != nullptr)
+                return true;
+            return false;
+        }
+
         template<typename T>
         std::vector<Entity>& getEntitiesWithComponent()
         {
@@ -46,6 +54,26 @@ class ECSManager {
             static std::vector<Entity> emptyList;
             return emptyList;
         }
+
+        template<typename T, typename U>
+        std::vector<Entity>& getBothComponents()
+        {
+            std::vector<Entity>& entities = getEntitiesWithComponent<T>();
+            std::vector<Entity> ent;
+
+            if (!entities.empty())
+            {
+                for(auto i = entities.begin(); i != entities.end(); i++)
+                {
+                    if (hasBothComponents<T, U>(i))
+                    {
+                        ent.push_back(*i);
+                    }
+                }
+            }
+            return ent;
+        }
+
 
     private:
         int nextEntityId;
