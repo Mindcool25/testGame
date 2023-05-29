@@ -5,7 +5,7 @@ Display::Display() {
 }
 
 
-int Display::render() {
+int Display::render(std::vector<Entity> sprites, ECSManager manager) {
     // Check if window is still open
     if(disp.isOpen()) {
         sf::Event event;
@@ -19,11 +19,11 @@ int Display::render() {
 
         for(auto i = sprites.begin(); i != sprites.end(); i++)
         {
-            disp.draw(*i);
+            sf::Sprite test = manager.getComponent<Actor>(*i) -> actor;
+            disp.draw(test);
         }
 
         disp.display();
-
         return 0;
     }
     else

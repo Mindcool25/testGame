@@ -4,15 +4,11 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <algorithm>
 
 struct Entity {
     int id;
     std::unordered_map<std::string, void*> components;
-};
-
-struct Pos {
-    int x;
-    int y;
 };
 
 class ECSManager {
@@ -20,8 +16,6 @@ class ECSManager {
         ECSManager();
         Entity& createEntity();
 
-        //template<typename T>
-        //void addComp(Entity& entity, T comp);
         template<typename T>
         void addComp(Entity& entity, T comp)
         {

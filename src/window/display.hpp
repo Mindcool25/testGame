@@ -3,14 +3,15 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "../component/component.hpp"
+#include "../manager/manager.hpp"
 
 class Display {
     public:
         Display();
 
-        int render();
+        int render(std::vector<Entity> sprites, ECSManager manager);
 
-        std::vector<sf::Sprite> sprites;
         sf::RenderWindow disp;
 };
 

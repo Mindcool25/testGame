@@ -9,7 +9,6 @@ add_executable(
   src/manager/manager.cpp
   src/ascii/asciisheet.cpp
   src/window/display.cpp
-  src/component/component.cpp
   src/main.cpp
 )
 

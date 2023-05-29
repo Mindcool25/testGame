@@ -1,18 +1,29 @@
 #ifndef COMPONENT_H_
 #define COMPONENT_H_
 
-#include <iostream>
+#include <SFML/Graphics.hpp>
 
-class Component {
-    public:
-        virtual void init() = 0;
-
+// Positioning
+struct Pos {
+    int x;
+    int y;
 };
 
-class Woo:Component {
-    public:
-        void init() override;
+struct Velocity {
+    int x;
+    int y;
 };
 
+// Graphics
+struct SpriteSheet {
+    sf::Texture& texture;
+};
 
+struct Actor {
+    sf::Sprite actor;
+};
+
+struct Controllable {
+    bool current;
+};
 #endif // COMPONENT_H_
