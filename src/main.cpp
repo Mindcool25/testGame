@@ -12,7 +12,9 @@
 
 #include "manager/manager.hpp"
 
-int input(ECSManager manager);
+void input(ECSManager manager);
+void updateActor(ECSManager manager);
+void updateMovement(ECSManager manager);
 
 int main(int argc, char* argv[]) {
 
@@ -38,17 +40,16 @@ int main(int argc, char* argv[]) {
 
     Entity e1 = manager.createEntity();
 
-    manager.addComp(e1, Pos{0, 0});
+    manager.addComp(e1, Pos{16, 16});
     manager.addComp(e1, Actor{sprite});
     manager.addComp(e1, Controllable{true});
-    manager.addComp(e1, Velocity{0, -1});
+    manager.addComp(e1, Velocity{0, 0});
 
     if (manager.hasBothComponents<Pos, Actor>(e1))
     {
         std::cout << "yes" << std::endl;
     }
     Pos* pos1 = manager.getComponent<Pos>(e1);
-    std::cout << "x: " << pos1->x << " y: " << pos1->y << std::endl;
 
 
 	// SFML stuff
@@ -61,8 +62,9 @@ int main(int argc, char* argv[]) {
     {
         // Systems
         input(manager);
+        updateMovement(manager);
+        updateActor(manager);
         Pos* pos1 = manager.getComponent<Pos>(e1);
-        std::cout << "x: " << pos1->x << " y: " << pos1->y << std::endl;
     }
 
     // Creating lua object to hold a script
@@ -82,7 +84,7 @@ int main(int argc, char* argv[]) {
 }
 
 
-int input(ECSManager manager)
+void input(ECSManager manager)
 {
     std::vector<Entity> movers = manager.getEntitiesWithComponent<Controllable>();
 
@@ -92,11 +94,17 @@ int input(ECSManager manager)
         {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
             {
-                manager.getComponent<Velocity>(*i)->x -= 1;
+                std::cout << "almost to crash" << std::endl;
+                std::cout << "WOOO" << std::endl;
+                if(manager.getComponent<Pos>(*i) == nullptr)
+                {
+                    std::cout << "Oh no bois" << std::endl;
+                }
+                manager.getComponent<Pos>(*i)->x += 1;
+                std::cout << "Whoops" << std::endl;
             }
         }
     }
-    return 0;
 }
 
 void updateMovement(ECSManager manager)
@@ -121,7 +129,6 @@ void updateActor(ECSManager manager)
     {
         Actor* actor = manager.getComponent<Actor>(*i);
         Pos* pos = manager.getComponent<Pos>(*i);
-        std::cout << "test" << std::endl;
 
         actor->actor.setPosition(pos->x, pos->y);
     }
