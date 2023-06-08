@@ -6,9 +6,9 @@ add_compile_options(-Wall)
 
 add_executable(
   testgame
-  src/manager/manager.cpp
   src/ascii/asciisheet.cpp
-  src/window/display.cpp
+  src/board/board.cpp
+  src/display/display.cpp
   src/main.cpp
 )
 
