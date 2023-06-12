@@ -58,10 +58,8 @@ int Display::draw(std::vector<Entity> sprites, Board state) {
 
     // Add entites to buffer
     for(auto i = sprites.begin(); i < sprites.end(); i++) {
-        std::cout << "Hey, entity rendering" <<std::endl;
-        (buffer.at(i->y)).at(i->x) = i->actor;
+        i->actor.setPosition(sf::Vector2f(i->x*16, i->y*16));
+        buffer.at(i->y).at(i->x) = i->actor;
     }
-
-    std::cout << "Finished drawing" << std::endl;
     return 0;
 }

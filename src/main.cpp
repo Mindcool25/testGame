@@ -28,13 +28,14 @@ int main(int argc, char* argv[]) {
 
     sf::Sprite sprite;
     sprite.setTexture(texture);
+    sprite.setColor(sf::Color::Green);
     sprite.setTextureRect(test.asciiList.at(2));
 
     sf::Sprite fill;
     fill.setTexture(texture);
     fill.setTextureRect(test.asciiList.at(47));
 
-    Board map(fill);
+    Board map(texture, test);
     std::cout << map.map.size() << std::endl;
     std::cout << map.map.at(0).size() << std::endl;
 

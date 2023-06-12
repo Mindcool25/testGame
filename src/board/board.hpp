@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include "../ascii/asciisheet.hpp"
 
 struct Node {
   sf::Sprite actor;
@@ -10,7 +11,7 @@ struct Node {
 
 class Board {
 public:
-  Board(sf::Sprite fill);
+  Board(sf::Texture texture, AsciiSheet sheet);
   std::vector<std::vector<Node>> map;
 
 };
