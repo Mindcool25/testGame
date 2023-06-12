@@ -9,6 +9,7 @@ add_executable(
   src/ascii/asciisheet.cpp
   src/board/board.cpp
   src/display/display.cpp
+  src/input/input.cpp
   src/main.cpp
 )
 

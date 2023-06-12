@@ -10,6 +10,8 @@
 
 #include "entity/entity.hpp"
 
+#include "input/input.hpp"
+
 
 int main(int argc, char* argv[]) {
 
@@ -31,10 +33,7 @@ int main(int argc, char* argv[]) {
     sprite.setColor(sf::Color::Green);
     sprite.setTextureRect(test.asciiList.at(2));
 
-    sf::Sprite fill;
-    fill.setTexture(texture);
-    fill.setTextureRect(test.asciiList.at(47));
-
+    // Creating the map
     Board map(texture, test);
     std::cout << map.map.size() << std::endl;
     std::cout << map.map.at(0).size() << std::endl;
@@ -49,13 +48,43 @@ int main(int argc, char* argv[]) {
     std::vector<Entity> actors;
     actors.push_back(woo);
 
+    // Creating input variables
+    Input up(sf::Keyboard::K);
+    Input down(sf::Keyboard::J);
+    Input left(sf::Keyboard::H);
+    Input right(sf::Keyboard::L);
+
     // SFML stuff
     // create the window
     Display disp;
     disp.draw(actors, map);
-    while (disp.render() != 1) {
 
+    // main game loop
+    while (disp.render() != 1) {
         disp.draw(actors, map);
+        for (auto i = actors.begin(); i < actors.end(); i++)
+        {
+            // Loop over actors and control them according to brain.
+            if (i->brain == player)
+            {
+                if (left.isKeyPressed())
+                {
+                    i->x -= 1;
+                }
+                else if (right.isKeyPressed())
+                {
+                    i->x += 1;
+                }
+                else if (up.isKeyPressed())
+                {
+                    i->y -= 1;
+                }
+                else if (down.isKeyPressed())
+                {
+                    i->y += 1;
+                }
+            }
+        }
     }
 
 
