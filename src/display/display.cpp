@@ -19,7 +19,7 @@ int Display::render() {
             }
         }
 
-        disp.clear(sf::Color::Blue);
+        disp.clear(sf::Color::Black);
 
         std::cout << "Rendering buffer" <<std::endl;
         for(auto i = buffer.begin(); i < buffer.end(); i++)
