@@ -7,6 +7,7 @@ Input::Input(sf::Keyboard::Key in)
 }
 
 // Checks if the key was previously down
+// TODO: Maybe add more complex behavior?
 bool Input::isKeyPressed()
 {
     if(released)

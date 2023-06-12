@@ -38,6 +38,7 @@ int Display::render() {
 }
 
 // TODO: Apply position to all nodes before actually drawing them. Maybe have an update func?
+// TODO: Be able to zoom in and out of screen. UI also needs to be worked on.
 int Display::draw(std::vector<Entity> sprites, Board state) {
     buffer.clear();
     std::cout << "We got to drawing lads" << std::endl;
