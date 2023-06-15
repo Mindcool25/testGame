@@ -34,7 +34,8 @@ int main(int argc, char* argv[]) {
     sprite.setTextureRect(test.asciiList.at(2));
 
     // Creating the map
-    Board map(texture, test);
+    // texture MUST be passed via reference pointer
+    Board map(&texture, test);
     std::cout << map.map.size() << std::endl;
     std::cout << map.map.at(0).size() << std::endl;
 

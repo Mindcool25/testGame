@@ -11,7 +11,7 @@ struct Node {
 
 class Board {
 public:
-  Board(sf::Texture texture, AsciiSheet sheet);
+  Board(sf::Texture* texture, AsciiSheet sheet);
   std::vector<std::vector<Node>> map;
 
 };

@@ -21,7 +21,6 @@ int Display::render() {
 
         disp.clear(sf::Color::Black);
 
-        std::cout << "Rendering buffer" <<std::endl;
         for(auto i = buffer.begin(); i < buffer.end(); i++)
         {
             for(auto j = i->begin(); j < i->end(); j++)
@@ -41,7 +40,6 @@ int Display::render() {
 // TODO: Be able to zoom in and out of screen. UI also needs to be worked on.
 int Display::draw(std::vector<Entity> sprites, Board state) {
     buffer.clear();
-    std::cout << "We got to drawing lads" << std::endl;
     // Add map to buffer
     for(auto i = state.map.begin(); i < state.map.end(); i++)
     {
@@ -51,11 +49,7 @@ int Display::draw(std::vector<Entity> sprites, Board state) {
             tempVec.push_back(j->actor);
         }
         buffer.push_back(tempVec);
-        std::cout << "Hey, map drawing" << std::endl;
-        std::cout << buffer.size() << std::endl;
     }
-
-    std::cout << "Finished map" << std::endl;
 
     // Add entites to buffer
     for(auto i = sprites.begin(); i < sprites.end(); i++) {
